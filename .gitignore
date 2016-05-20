@@ -1,0 +1,12 @@
+*.pyc
+tktest.c
+*.so
+*.pyd
+*.o
+*.obj
+build/
+.cache/
+*.egg-info/
+MANIFEST
+dist/
+.eggs/
