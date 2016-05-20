@@ -13,7 +13,6 @@ import sys
 import warnings
 from textwrap import fill
 import shutil
-import versioneer
 
 
 PY3min = (sys.version_info[0] >= 3)
@@ -1721,11 +1720,13 @@ class BackendTkAgg(OptionalBackendPackage):
 
     def add_flags(self, ext):
         if sys.platform == 'win32':
-            if os.getenv('CONDA_DEFAULT_ENV'):
+            conda_env = os.getenv('CONDA_DEFAULT_ENV')
+            if conda_env:
                 # We are in conda and conda builds against tcl85 for all versions
                 # includes are directly in the conda\library\include dir and
                 # libs in DLL or lib
-                ext.include_dirs.extend(['include'])
+                inc_dir = os.path.join(conda_env, 'Library', 'include')
+                ext.include_dirs.extend([inc_dir])
             else:
                 major, minor1, minor2, s, tmp = sys.version_info
                 if sys.version_info[0:2] < (3, 4):

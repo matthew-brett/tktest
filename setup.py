@@ -13,9 +13,6 @@ from Cython.Build import cythonize
 libs = ['psapi'] if sys.platform == 'win32' else []
 ext = Extension('tktest',
                  ['tktest.pyx', 'find_tk.c'],
-                 include_dirs = [
-                     'libx86cpu',
-                     r"c:\code\matplotlib-winbuild\build\msvcr100-x32\tcl85\include"],
                  libraries = libs)
 from setupext import BackendTkAgg
 BackendTkAgg().add_flags(ext)
